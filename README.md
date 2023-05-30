@@ -5,17 +5,9 @@ This language is like C, but pleasant to use. It can be compiled to C and use C 
 Anything that isn't in this doc behaves the same as C.
 
 To Do:
-    - name() vs name(void)
-    - typeof and _Generic
     - Garbage collection
-    - Unions
     - File paths
         - Header files and #include
-    - Pointers to functions need address
-        - Initializing function pointers
-    - Passing 2d arrays to functions. How to do.
-    - printf and scanf
-        - Maybe use another function called print and input like python.
 
 ## Formatting
 - Indentation instead of {}s
@@ -29,6 +21,7 @@ To Do:
     - `int32 start(int32 argc, (char[])[] args)`
 - No variadic functions. Use arrays instead.
 - Void cannot be used inside functions. Use () instead.
+    - Compiles to: func_name(void) and not func_name()
 - macro keyword instead of #define
 
 ```
@@ -38,6 +31,7 @@ macro max(a, b)
 macro pi()
     3.14
 ```
+
 
 ## Do while loops
 - Instead of having the while at the bottom the do and while is on the same line.
@@ -54,7 +48,7 @@ do while(true)
 char[] str_name = "string"
 int32 str_size = sizeof(str_name) / sizeof(str_name[0])
 for(int32 i = 0, i < str_size, i+=1)
-    print(str_name[i])
+    printf("%c", str_name[i])
     //prints out str_name
 ```
 
@@ -85,8 +79,9 @@ for(int32 i = 0, i < str_size, i+=1)
     - type[size] array_name
     - ->type ptr_name
 - Nothing changes with dereferencing arrays and pointers
-- Functions can take arrays with undefined sizes.
-    - `void name((int32[])[] arg)`
+- Functions can take arrays with undefined sizes, but to make them usable the size of the array should be another arg(except for strings where \0 can be used to determine its size).
+    - `void name(int32 outer_array_size, int32 inner_array_size, (int32[])[] arg)`
+        - Compiles to: `void name(int32_t outer_array_size, int32_t inner_array_size, int32_t (*arg)[])`
 
 ```
 int32 start(int32 argc, (char[])[] args)
@@ -98,6 +93,19 @@ int32 start(int32 argc, (char[])[] args)
         ->(int32[]) pointers_to_array
     // An array of pointers to ints
         (->int32)[] array_of_pointers
+    return 0
+```
+
+### Pointers to functions
+
+```
+int32 add(int32 a, int32 b)
+    return a + b
+
+int32 start()
+    ->(int32 (int32, int32)) func_ptr1 = add
+    // This is also valid
+    ->(int32 (int32, int32)) func_ptr2 = &add
     return 0
 ```
 
@@ -113,24 +121,24 @@ int32 start(int32 argc, (char[])[] args)
 int32 match_int = 4
 match(match_int)
     case(1)
-        print("This is a 1.\n")
+        printf("This is a 1.\n")
     case(2)
-        print("This is a 2.\n")
+        printf("This is a 2.\n")
     case(3)
-        print("This is a 3.\n")
+        printf("This is a 3.\n")
     default
-        print("This is greater than 3.\n")
+        printf("This is greater than 3.\n")
 
 // What it compiles to in C
 int32_t match_int = 4;
 if( match_int == 1 ){
-    print("This is a 1.\n");
+    printf("This is a 1.\n");
 }if else( match_int == 2){
-    print("This is a 2.\n");
+    printf("This is a 2.\n");
 }if else( match_int == 3){
-    print("This is a 3.\n");
+    printf("This is a 3.\n");
 }else{
-    print("This is greater than 3.\n");
+    printf("This is greater than 3.\n");
 }
 ```
 
@@ -139,29 +147,29 @@ if( match_int == 1 ){
 char[] name = "C++"
 match(name)
     case("C++" || "Java")
-        print("This is Trash.\n")
+        printf("This is Trash.\n")
     case("C++")
-        print("Why?\n")
+        printf("Why?\n")
     case("C")
-        print("This is Good.\n")
+        printf("This is Good.\n")
     case("NPL")
-        print("This is the Best.\n")
+        printf("This is the Best.\n")
     default
-        print("This is nothing.\n")
+        printf("This is nothing.\n")
 // This will only print This is Trash and not Why?
 
 // In C this compiles to
 char name[] = "C++";
 if( !strcmp(name, "C++") || !strcmp(name, "Java") ){
-    print("This is Trash.\n");
+    printf("This is Trash.\n");
 }else if( !strcmp(name, "C++") ){
-    print("Why?\n");
+    printf("Why?\n");
 }else if( !strcmp(name, "C") ){
-    print("This is Good.\n");
+    printf("This is Good.\n");
 }else if( !strcmp(name, "NPL") ){
-    print("This is the Best.\n");
+    printf("This is the Best.\n");
 }else{
-    print("This is nothing.\n");
+    printf("This is nothing.\n");
 }
 ```
 
