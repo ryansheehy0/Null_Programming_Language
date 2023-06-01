@@ -4,20 +4,25 @@ A language that makes C pleasant to use. It can be compiled to C and use C libra
 # Differences from C
 Anything that isn't in this doc behaves the same as C.
 
+```
+#include <stdio.h>
+
+i32 main()
+    printf("Hello World!")
+    return 0
+```
+
 To Do:
-    - Garbage collection
-        - Look at Rust
-    - File paths
-        - Header files and #include
+- File paths
+    - How the linker works
+    - Header files and #include
+    - extern
+    - #ifdef #idndef
 
 ## Formatting
 - Indentation instead of {}s
 - New lines instead of ;s
-
-## Subroutines
-- start function instead of main function
-    - `int32 start(int32 argc, (char[])[] args)`
-    - Compiles to: `int32_t main(int32_t argc, char *args[])`
+- goto statements cannot be used in NPL
 - Void cannot be used inside functions. Use () instead.
     - Compiles to: `func_name(void)` and not `func_name()`
 
@@ -34,8 +39,8 @@ do while(true)
 
 ```
 char[] str_name = "string"
-int32 str_size = sizeof(str_name) / sizeof(str_name[0])
-for(int32 i = 0, i < str_size, i++)
+i32 str_size = sizeof(str_name) / sizeof(str_name[0])
+for(i32 i = 0, i < str_size, i++)
     printf("%c", str_name[i])
     //prints out str_name
 ```
@@ -45,20 +50,23 @@ for(int32 i = 0, i < str_size, i++)
     - Compiles to: `pow(a, b)`
 
 ## Data types
+- Other data types in C can be used, but it is not recommended.
 - Singed ints
-    - `int8, int16, int32, int64`
+    - `i8, i16, i32, i64`
     - Compiles to: `int8_t, int16_t, int32_t, int64_t`
 - Unsigned ints
-    - `uint8, uint16, uint32, uint64`
+    - `u8, u16, u32, u64`
     - Compiles to: `unsigned int8_t, unsigned int16_t, unsigned int32_t, unsigned int64_t`
-- Singed floating point numbers
-    - `float32, float64`
+- Floating point numbers
+    - `f32, f64`
     - Compiles to: `float, double`
 - Characters
-    - `char, uchar`
-        - Compiles to: `signed char, unsigned char`
+    - `char`
+        - Compiles to: `signed char`
 - Booleans
     - `bool`
+        - Compiles to: `_Bool`
+        - `true` and `false` can be used
 
 ## Arrays and Pointers
 - Initializing arrays and pointers is different
@@ -66,19 +74,19 @@ for(int32 i = 0, i < str_size, i++)
     - ->type ptr_name
 - Nothing changes with dereferencing arrays and pointers
 - Functions can take arrays with undefined sizes, but to make them usable the size of the array should be another arg(except for strings where \0 can be used to determine its size).
-    - `void name(int32 outer_array_size, int32 inner_array_size, (int32[])[] arg)`
+    - `void name(i32 outer_array_size, i32 inner_array_size, (i32[])[] arg)`
         - Compiles to: `void name(int32_t outer_array_size, int32_t inner_array_size, int32_t (*arg)[])`
 
 ```
-int32 start(int32 argc, (char[])[] args)
-    ->int32 ptr
-    ->(->int32) double_ptr
-    int32[] array
-    (int32[])[] double_array
+i32 main(i32 argc, (char[])[] args)
+    ->i32 ptr
+    ->(->i32) double_ptr
+    i32[] array
+    (i32[])[] double_array
     // Points to an array of ints
-        ->(int32[]) pointers_to_array
+        ->(i32[]) pointers_to_array
     // An array of pointers to ints
-        (->int32)[] array_of_pointers
+        (->i32)[] array_of_pointers
     return 0
 
 // Compiles to
@@ -98,13 +106,13 @@ int32_t main(int32_t argc, char *args[]){
 ### Pointers to functions
 
 ```
-int32 add(int32 a, int32 b)
+i32 add(i32 a, i32 b)
     return a + b
 
-int32 start()
-    ->(int32 (int32, int32)) func_ptr1 = add
+i32 main()
+    ->(i32 (i32, i32)) func_ptr1 = add
     // This is also valid
-    ->(int32 (int32, int32)) func_ptr2 = &add
+    ->(i32 (i32, i32)) func_ptr2 = &add
     return 0
 ```
 
@@ -117,7 +125,7 @@ int32 start()
 
 ```
 // In NPL
-int32 match_int = 4
+i32 match_int = 4
 match(match_int)
     case(1)
         printf("This is a 1.\n")
