@@ -1,5 +1,5 @@
 # Null Programming Language
-A language that makes C pleasant to use. It can be compiled to C and use C libraries.
+A language that makes C pleasant to use. It is compiled to C and can use C libraries.
 
 # Differences from C
 Anything that isn't in this doc behaves the same as C.
