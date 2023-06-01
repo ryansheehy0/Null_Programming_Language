@@ -12,13 +12,6 @@ i32 main()
     return 0
 ```
 
-To Do:
-- File paths
-    - How the linker works
-    - Header files and #include
-    - extern
-    - #ifdef #idndef
-
 ## Formatting
 - Indentation instead of {}s
 - New lines instead of ;s
