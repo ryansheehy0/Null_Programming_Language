@@ -9,10 +9,6 @@ To Do:
         - Look at Rust
     - File paths
         - Header files and #include
-    - Data types
-        - int vs int32_t
-            - How does this work for the start function?
-        - Can you use other data types that are valid in C?
 
 ## Formatting
 - Indentation instead of {}s
@@ -21,7 +17,7 @@ To Do:
 ## Subroutines
 - start function instead of main function
     - `int32 start(int32 argc, (char[])[] args)`
-    - Compiles to: `int main(int argc, char *args[])`
+    - Compiles to: `int32_t main(int32_t argc, char *args[])`
 - Void cannot be used inside functions. Use () instead.
     - Compiles to: `func_name(void)` and not `func_name()`
 
@@ -50,19 +46,19 @@ for(int32 i = 0, i < str_size, i++)
 
 ## Data types
 - Singed ints
-    - int8, int16, int32, int64
-    - Compiles to: int8_t, int16_t, int32_t, int64_t
+    - `int8, int16, int32, int64`
+    - Compiles to: `int8_t, int16_t, int32_t, int64_t`
 - Unsigned ints
-    - uint8, uint16, uint32, uint64
-    - Compiles to: unsigned int8_t, unsigned int16_t, unsigned int32_t, unsigned int64_t
+    - `uint8, uint16, uint32, uint64`
+    - Compiles to: `unsigned int8_t, unsigned int16_t, unsigned int32_t, unsigned int64_t`
 - Singed floating point numbers
-    - float32, float64
-    - Compiles to: float, double
+    - `float32, float64`
+    - Compiles to: `float, double`
 - Characters
-    - char, uchar
-        - Compiles to: signed char, unsigned char
+    - `char, uchar`
+        - Compiles to: `signed char, unsigned char`
 - Booleans
-    - bool
+    - `bool`
 
 ## Arrays and Pointers
 - Initializing arrays and pointers is different
@@ -84,6 +80,19 @@ int32 start(int32 argc, (char[])[] args)
     // An array of pointers to ints
         (->int32)[] array_of_pointers
     return 0
+
+// Compiles to
+int32_t main(int32_t argc, char *args[]){
+    int32_t *ptr;
+    int32_t **double_ptr;
+    int32_t array[];
+    int32_t double_array[][];
+    // Points to an array of ints
+        int32_t (*pointers_to_array)[];
+    // An array of pointers to ints
+        int32_t *array_of_pointers[];
+    return 0;
+}
 ```
 
 ### Pointers to functions
@@ -107,7 +116,7 @@ int32 start()
 - Match statements are meant to replace switch in C. You cannot use the switch block in NPL.
 
 ```
-// NPL
+// In NPL
 int32 match_int = 4
 match(match_int)
     case(1)
