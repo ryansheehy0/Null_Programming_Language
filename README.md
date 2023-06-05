@@ -62,7 +62,7 @@ for(i32 i = 0, i < str_size, i++)
         - `true` and `false` can be used
 
 ## Arrays and Pointers
-- Initializing arrays and pointers is different
+- Initializing arrays and pointers, casting to arrays and pointers, and returning arrays and pointers from functions are different in NPL.
     - type[size] array_name
     - ->type ptr_name
 - Nothing changes with dereferencing arrays and pointers
@@ -101,6 +101,9 @@ int32_t main(int32_t argc, char *args[]){
 ```
 i32 add(i32 a, i32 b)
     return a + b
+
+->i32 return_32_bits()
+    return malloc(4)
 
 i32 main()
     ->(i32 (i32, i32)) func_ptr1 = add
@@ -170,6 +173,31 @@ if( !strcmp(name, "C++") || !strcmp(name, "Java") ){
     printf("This is the Best.\n");
 }else{
     printf("This is nothing.\n");
+}
+```
+
+## Functions
+- There is automatic function prototyping. Meaning the order in which functions are initialized and used doesn't matter.
+    - You can call a function that was initialized after the function that is calling it.
+
+```
+i32 main()
+    hello_world()
+    return 0
+
+void hello_world()
+    printf("Hello World\n")
+
+// This compiles to:
+void hello_world(void);
+
+int32_t main(void){
+    hello_world();
+    return 0;
+}
+
+void hello_world(void){
+    printf("Hello World\n");
 }
 ```
 
