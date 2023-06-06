@@ -1,14 +1,31 @@
 # Future Features
-At the moment this language is very similar to the very first programming languages. They weren't a completely different language, but they instead provided tools to allow programming in assembly to be easier. People still needed to think in asssembly to use the "language". Over time, more and more features got added until the "language" became an actual language where people would think in that language rather than in assembly.
 
-As the early programming languages gave tools for assembly programming so to does this language give tools for C programming. Maybe eventually there will be enough features added to this "language" to make it an actual new language.
+## #include "Folder/.../file.h" or #include "Folder/.../Folder2/file.h"
+In Linux, the reason ./ and ../ work in file paths is because there is a requirement that ensures that there can't be 2 or more files/folders with the exact same name within the same folder. What if this concept can be applied recursively to each sub-folder.
 
-These are possible future features to make that a reality.
+If a user can guarantee that there are no conflicting file/folder names recursively within a folder, they can use `#include "Folder/.../file.h"` to allow the compiler to recursively search the Folder and find the file.h because there should only be one file.h.
 
-- Folder/.../file
-- Garbage collection
-    - Prevent casting to pointers and keep track of references to memory
-- Remove unnecessary keywords in C
-    - ++ and --
-- BNF or regex data type
-    - Checks if data matches the BNF or regex during run time
+If there are multiple files/folders with the same name occurring recursively within a folder, the compiler should throw an error. This requirement ensures that file/folder references remain unambiguous and avoids potential conflicts which could cause bugs that are very hard to solve. 
+
+By organizing a project in a folder structure that adheres to these requirements and referencing header files using .../, it becomes possible to rearrange the organization of files/folders within the project without needing to update file paths for each individual header file.
+
+## Garbage collection
+Prevent casting to pointers and keep track of references to memory. When there is no more references then free memory automatically.
+
+## export
+When the "export" keyword is used the compiler creates a header file and includes the symbol(variable, function, etc) that is exported in that header file.
+
+```
+export void exported_function()
+    //code
+
+// Compiles to: In .c file
+void exported_function(){
+    //code
+}
+
+// Compiles to: In .h file
+#pragma once
+
+void exported_function();
+```

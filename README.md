@@ -4,9 +4,7 @@ A language that makes C pleasant to use. It is compiled to C and can use C libra
 # Differences from C
 Anything that isn't in this doc behaves the same as C.
 
-```
-#include <stdio.h>
-
+``` #include <stdio.h>
 i32 main()
     printf("Hello World!")
     return 0
@@ -41,7 +39,7 @@ do while(true)
 
 ```
 char[] str_name = "string"
-i32 str_size = sizeof(str_name) / sizeof(str_name[0])
+i32 str_size = sizeof(str_name)
 for(i32 i = 0, i < str_size, i++)
     printf("%c", str_name[i])
     //prints out str_name
