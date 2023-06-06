@@ -1,4 +1,4 @@
-# Null Programming Language
+# Null Programming Language(NPL)
 A language that makes C pleasant to use. It is compiled to C and can use C libraries.
 
 # Differences from C
@@ -14,6 +14,15 @@ i32 main()
 
 ## Formatting
 - Indentation instead of {}s
+    - You can indent after single line comments to make folding blocks of code easier.
+
+```
+// Code block title
+    i32 test_var
+    test_var += 1
+    // Some other code
+```
+
 - New lines instead of ;s
 - goto statements cannot be used in NPL
 - Void cannot be used inside functions. Use () instead.
@@ -82,6 +91,9 @@ i32 main(i32 argc, (char[])[] args)
         (->i32)[] array_of_pointers
     return 0
 
+->i32 return_32_bits()
+    return malloc(4)
+
 // Compiles to
 int32_t main(int32_t argc, char *args[]){
     int32_t *ptr;
@@ -94,6 +106,10 @@ int32_t main(int32_t argc, char *args[]){
         int32_t *array_of_pointers[];
     return 0;
 }
+
+int32_t* return_32_bits(){
+    return malloc(4);
+}
 ```
 
 ### Pointers to functions
@@ -101,9 +117,6 @@ int32_t main(int32_t argc, char *args[]){
 ```
 i32 add(i32 a, i32 b)
     return a + b
-
-->i32 return_32_bits()
-    return malloc(4)
 
 i32 main()
     ->(i32 (i32, i32)) func_ptr1 = add
@@ -120,7 +133,6 @@ i32 main()
 - Match statements are meant to replace switch in C. You cannot use the switch block in NPL.
 
 ```
-// In NPL
 i32 match_int = 4
 match(match_int)
     case(1)
@@ -132,7 +144,7 @@ match(match_int)
     default
         printf("This is greater than 3.\n")
 
-// What it compiles to in C
+// Compiles to:
 int32_t match_int = 4;
 if( match_int == 1 ){
     printf("This is a 1.\n");
@@ -146,7 +158,6 @@ if( match_int == 1 ){
 ```
 
 ```
-// In NPL
 char[] name = "C++"
 match_string(name)
     case("C++" || "Java")
@@ -161,7 +172,7 @@ match_string(name)
         printf("This is nothing.\n")
 // This will only print This is Trash and not Why?
 
-// In C this compiles to
+// Compiles to:
 char name[] = "C++";
 if( !strcmp(name, "C++") || !strcmp(name, "Java") ){
     printf("This is Trash.\n");
@@ -188,7 +199,7 @@ i32 main()
 void hello_world()
     printf("Hello World\n")
 
-// This compiles to:
+// Compiles to:
 void hello_world(void);
 
 int32_t main(void){
