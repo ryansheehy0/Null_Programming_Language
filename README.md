@@ -1,10 +1,22 @@
 # Null Programming Language(NPL)
 A language that makes C pleasant to use. It is compiled to C and can use C libraries.
 
+```
+ __   __ ______   __ 
+|  \ |  |   __  \|  |     
+|   \|  |  |__)  |  |     
+|       |   ____/|  |     
+|  |\   |  |     |  |____ 
+|__| \__|__|     |_______|
+
+```
+
 # Differences from C
 Anything that isn't in this doc behaves the same as C.
 
-``` #include <stdio.h>
+``` 
+#include <stdio.h>
+
 i32 main()
     printf("Hello World!")
     return 0
