@@ -4,11 +4,10 @@ A language that makes C pleasant to use. It is compiled to C and can use C libra
 ```
  __   __ ______   __ 
 |  \ |  |   __  \|  |     
-|   \|  |  |__)  |  |     
+|   \|  |  |__|  |  |     
 |       |   ____/|  |     
 |  |\   |  |     |  |____ 
 |__| \__|__|     |_______|
-
 ```
 
 # Differences from C
