@@ -1,5 +1,5 @@
 # Null Programming Language(NPL)
-A language that makes C pleasant to use. It is compiled to C and can use C libraries.
+A programming language that makes C pleasant to use. It is compiled to C and can use C libraries.
 
 ```
  __   __ ______   __ 
@@ -16,7 +16,7 @@ Anything that isn't in this doc behaves the same as C.
 ``` 
 #include <stdio.h>
 
-i32 main()
+int main()
     printf("Hello World!")
     return 0
 ```
@@ -27,7 +27,7 @@ i32 main()
 
 ```
 // Code block title
-    i32 test_var
+    int test_var
     test_var += 1
     // Some other code
 ```
@@ -50,8 +50,8 @@ do while(true)
 
 ```
 char[] str_name = "string"
-i32 str_size = sizeof(str_name)
-for(i32 i = 0, i < str_size, i++)
+int str_size = sizeof(str_name)
+for(int i = 0, i < str_size, i++)
     printf("%c", str_name[i])
     //prints out str_name
 ```
@@ -60,63 +60,44 @@ for(i32 i = 0, i < str_size, i++)
 - ** for exponents
     - Compiles to: `pow(a, b)`
 
-## Data types
-- Other data types in C can be used, but it is not recommended.
-- Singed ints
-    - `i8, i16, i32, i64`
-    - Compiles to: `int8_t, int16_t, int32_t, int64_t`
-- Unsigned ints
-    - `u8, u16, u32, u64`
-    - Compiles to: `unsigned int8_t, unsigned int16_t, unsigned int32_t, unsigned int64_t`
-- Floating point numbers
-    - `f32, f64`
-    - Compiles to: `float, double`
-- Characters
-    - `char`
-        - Compiles to: `signed char`
-- Booleans
-    - `bool`
-        - Compiles to: `_Bool`
-        - `true` and `false` can be used
-
 ## Arrays and Pointers
 - Initializing arrays and pointers, casting to arrays and pointers, and returning arrays and pointers from functions are different in NPL.
     - type[size] array_name
     - ->type ptr_name
 - Nothing changes with dereferencing arrays and pointers
 - Functions can take arrays with undefined sizes, but to make them usable the size of the array should be another arg(except for strings where \0 can be used to determine its size).
-    - `void name(i32 outer_array_size, i32 inner_array_size, (i32[])[] arg)`
-        - Compiles to: `void name(int32_t outer_array_size, int32_t inner_array_size, int32_t (*arg)[])`
+    - `void name(int outer_array_size, int inner_array_size, (int[])[] arg)`
+        - Compiles to: `void name(int outer_array_size, int inner_array_size, int (*arg)[])`
 
 ```
-i32 main(i32 argc, (char[])[] args)
-    ->i32 ptr
-    ->(->i32) double_ptr
-    i32[] array
-    (i32[])[] double_array
+int main(int argc, (char[])[] args)
+    ->int ptr
+    ->(->int) double_ptr
+    int[] array
+    (int[])[] double_array
     // Points to an array of ints
-        ->(i32[]) pointers_to_array
+        ->(int[]) pointers_to_array
     // An array of pointers to ints
-        (->i32)[] array_of_pointers
+        (->int)[] array_of_pointers
     return 0
 
-->i32 return_32_bits()
+->int return_32_bits()
     return malloc(4)
 
 // Compiles to
-int32_t main(int32_t argc, char *args[]){
-    int32_t *ptr;
-    int32_t **double_ptr;
-    int32_t array[];
-    int32_t double_array[][];
+int main(int argc, char *args[]){
+    int *ptr;
+    int **double_ptr;
+    int array[];
+    int double_array[][];
     // Points to an array of ints
-        int32_t (*pointers_to_array)[];
+        int (*pointers_to_array)[];
     // An array of pointers to ints
-        int32_t *array_of_pointers[];
+        int *array_of_pointers[];
     return 0;
 }
 
-int32_t* return_32_bits(){
+int* return_32_bits(){
     return malloc(4);
 }
 ```
@@ -124,13 +105,13 @@ int32_t* return_32_bits(){
 ### Pointers to functions
 
 ```
-i32 add(i32 a, i32 b)
+int add(int a, int b)
     return a + b
 
-i32 main()
-    ->(i32 (i32, i32)) func_ptr1 = add
+int main()
+    ->(int (int, int)) func_ptr1 = add
     // This is also valid
-    ->(i32 (i32, i32)) func_ptr2 = &add
+    ->(int (int, int)) func_ptr2 = &add
     return 0
 ```
 
@@ -142,7 +123,7 @@ i32 main()
 - Match statements are meant to replace switch in C. You cannot use the switch block in NPL.
 
 ```
-i32 match_int = 4
+int match_int = 4
 match(match_int)
     case(1)
         printf("This is a 1.\n")
@@ -154,7 +135,7 @@ match(match_int)
         printf("This is greater than 3.\n")
 
 // Compiles to:
-int32_t match_int = 4;
+int match_int = 4;
 if( match_int == 1 ){
     printf("This is a 1.\n");
 }if else( match_int == 2){
@@ -201,7 +182,7 @@ if( !strcmp(name, "C++") || !strcmp(name, "Java") ){
     - You can call a function that was initialized after the function that is calling it.
 
 ```
-i32 main()
+int main()
     hello_world()
     return 0
 
@@ -211,7 +192,7 @@ void hello_world()
 // Compiles to:
 void hello_world(void);
 
-int32_t main(void){
+int main(void){
     hello_world();
     return 0;
 }

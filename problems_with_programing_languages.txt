@@ -1,0 +1,4 @@
+Since there are so many operators in each language people have their own subsets of a language.
+	Ex: GoTo, bitwize, for loops, do/while loops, auto, pointers, lamdas, etc.
+
+You cannot backtrace the source code to functions.

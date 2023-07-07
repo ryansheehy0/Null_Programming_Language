@@ -29,3 +29,16 @@ void exported_function(){
 
 void exported_function();
 ```
+
+## Automatic String Concatenation
+- When 2 char*s are next to one another this is automatic string concatenation.
+
+```
+->char string = "test."
+printf("This is a "string)
+
+// Compiles to. This doesn't work in C. Need to double check.
+char *string = "test.";
+printf(strcat("This is a", string));
+```
+
