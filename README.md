@@ -1,3 +1,4 @@
+
 # Null Programming Language(NPL)
 A programming language that makes C pleasant to use. It is compiled to C and can use C libraries.
 
@@ -20,6 +21,19 @@ int main()
     printf("Hello World!")
     return 0
 ```
+
+## Table of Contents
+- [Formatting](#formatting)
+- [Do while loops](#do-while-loops)
+- [For loops](#for-loops)
+- [Math Operators](#math-operators)
+- [Arrays and Pointers](#arrays-and-pointers)
+    - [Pointers to functions](#pointers-to-functions)
+- [Match](#match)
+- [Functions](#functions)
+- [Comments](#comments)
+- [Why No Garbage collection](#why-no-garbage-collection)
+- [Future Features](#future-features)
 
 ## Formatting
 - Indentation instead of {}s
@@ -205,3 +219,11 @@ void hello_world(void){
 ## Comments
 - This language allows for nested multi-line comments like `/* Comment /* Nested Comment */ This text is still a comment. */`
     - Compiles to: `/* Comment Nested Comment This text is still a comment. */`
+
+## Why No Garbage collection
+In order to allow garbage collection you would have to disallow casting to points to allow the garbage collector to keep track of the pointers.
+    The problem is that casting to pointer can be useful especially for very low level programming.
+    The solution to this is not a garbage collector, which also adds performance costs, but an IDE that tells you to free some memory to prevent memory leaks.
+        This can be simply done by seeing if a function returns a pointer and if it does then it is assumed that the return pointer needs to be freed.
+
+## [Future Features](./future_features.md)

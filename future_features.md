@@ -9,9 +9,6 @@ If there are multiple files/folders with the same name occurring recursively wit
 
 By organizing a project in a folder structure that adheres to these requirements and referencing header files using .../, it becomes possible to rearrange the organization of files/folders within the project without needing to update file paths for each individual header file.
 
-## Garbage collection
-Prevent casting to pointers and keep track of references to memory. When there is no more references then free memory automatically.
-
 ## export
 When the "export" keyword is used the compiler creates a header file and includes the symbol(variable, function, etc) that is exported in that header file.
 
@@ -41,4 +38,12 @@ printf("This is a "string)
 char *string = "test.";
 printf(strcat("This is a", string));
 ```
+
+## Threads
+- Like JS
+- async, and await for threads. No .then, no .catch, and no promises
+- fetch command
+
+## Event
+- Can create any event listener for when a variable changes.
 
